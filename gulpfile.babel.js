@@ -144,7 +144,7 @@ export const buildAdminJs = async function buildAdminJs() {
         babelrc: false,
         exclude: `${nodeModulesPath}/**`,
         presets: [
-          ['env', {
+          ['@babel/preset-env', {
             targets: {
               browsers: [
                 'last 2 versions',
@@ -159,18 +159,18 @@ export const buildAdminJs = async function buildAdminJs() {
               'transform-async-to-generator',
               'transform-regenerator',
             ],
-            useBuiltIns: true,
+            useBuiltIns: "entry",
           }],
         ],
         plugins: [
-          ['external-helpers'],
-          ['fast-async'],
+          ['@babel/external-helpers'],
+          ['module:fast-async'],
           ['module-resolver', {
             alias: {
               'sylius/ui': upath.relative('', upath.joinSafe(vendorUiPath, 'Resources/private/js')),
             },
           }],
-          ['transform-object-rest-spread', {
+          ['@babel/plugin-proposal-object-rest-spread', {
             useBuiltIns: false,
           }],
         ],
